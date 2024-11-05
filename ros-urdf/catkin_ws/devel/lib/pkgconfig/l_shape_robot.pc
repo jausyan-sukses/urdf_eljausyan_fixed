@@ -1,0 +1,8 @@
+prefix=/home/el-jausyan/catkin_ws/devel
+
+Name: l_shape_robot
+Description: Description of l_shape_robot
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

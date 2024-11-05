@@ -1,0 +1,15 @@
+<launch>
+    <!-- Parameter untuk path file URDF -->
+    <arg name="model" default="$(find l_shape_robot)/urdf/l_shape_robot.urdf"/>
+
+    <!-- Menambahkan node parameter server untuk model URDF -->
+    <param name="robot_description" command="cat $(arg model)" />
+
+    <!-- Menjalankan node robot_state_publisher untuk mempublikasikan tf dari model -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+        <param name="robot_description" textfile="$(arg model)" />
+    </node>
+
+    <!-- Menjalankan RViz untuk menampilkan robot -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find l_shape_robot)/launch/config.rviz" required="true" />
+</launch>

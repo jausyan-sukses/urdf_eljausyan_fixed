@@ -1,0 +1,137 @@
+<robot name="el_shape_robot">
+    <!-- Link vertikal untuk "L" -->
+    <link name="base_link">
+        <inertial>
+            <mass value="1.0"/>
+            <origin rpy="0 0 0" xyz="0 0 0.15"/>
+            <inertia ixx="0.0027" iyy="0.0027" izz="0.005" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.3"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0.0 0.0 1.0 1"/>
+            </material>
+            <origin rpy="0 0 0" xyz="0 0 0.15"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.3"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.02"/>
+        </collision>
+    </link>
+
+    <!-- Link horizontal untuk "L" -->
+     <link name="horizontal_link">
+        <inertial>
+            <mass value="1.0"/>
+            <origin rpy="0 0 0" xyz="0.1 0 0"/>
+            <inertia ixx="0.0027" iyy="0.0027" izz="0.005" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <box size="0.2 0.05 0.05"/>
+            </geometry>
+            <material name="green">
+                <color rgba="0.0 1.0 0.0 1"/>
+            </material>
+            <origin rpy="0 0 0" xyz="0.1 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.2 0.05 0.05"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.1 0 0"/>
+        </collision>
+    </link>
+
+    <!-- Joint antara base_link dan horizontal_link -->
+    <joint name="elbow_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="horizontal_link"/>
+        <origin rpy="0 0 0" xyz="0 0 -0.05"/>
+    </joint>
+
+    <!-- Link vertikal utama untuk "E" -->
+    <link name="vertical_link">
+        <inertial>
+            <mass value="1.0"/>
+            <origin rpy="0 0 0" xyz="0 0 0.15"/>
+            <inertia ixx="0.0027" iyy="0.0027" izz="0.005" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.2"/>
+            </geometry>
+            <material name="blue">
+                <color rgba="0.0 0.0 1.0 1"/>
+            </material>
+            <origin rpy="0 0 0" xyz="0 0 -0.02"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.2"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.15"/>
+        </collision>
+    </link>
+
+    <joint name="vertical_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="vertical_link"/>
+        <origin rpy="0 0 0" xyz="-0.2 0 0.1"/>
+    </joint>
+
+    <!-- Link horizontal atas untuk "E" -->
+    <link name="horizontal_top">
+        <visual>
+            <geometry>
+                <box size="0.15 0.05 0.05"/>
+            </geometry>
+            <material name="green"/>
+            <origin rpy="0 0 0" xyz="0.075 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="top_joint" type="fixed">
+        <parent link="vertical_link"/>
+        <child link="horizontal_top"/>
+        <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </joint>
+
+    <!-- Link horizontal tengah untuk "E" -->
+    <link name="horizontal_middle">
+        <visual>
+            <geometry>
+                <box size="0.15 0.05 0.05"/>
+            </geometry>
+            <material name="green"/>
+            <origin rpy="0 0 0" xyz="0.075 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="middle_joint" type="fixed">
+        <parent link="vertical_link"/>
+        <child link="horizontal_middle"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+    <!-- Link horizontal bawah untuk "E" -->
+    <link name="horizontal_bottom">
+        <visual>
+            <geometry>
+                <box size="0.15 0.05 0.05"/>
+            </geometry>
+            <material name="green"/>
+            <origin rpy="0 0 0" xyz="0.075 0 0"/>
+        </visual>
+    </link>
+
+    <joint name="bottom_joint" type="fixed">
+        <parent link="vertical_link"/>
+        <child link="horizontal_bottom"/>
+        <origin rpy="0 0 0" xyz="0 0 -0.1"/>
+    </joint>
+</robot>

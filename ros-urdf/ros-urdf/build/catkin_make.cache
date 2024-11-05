@@ -1,0 +1,2 @@
+arm_controller:robot_desc
+-DCATKIN_DEVEL_PREFIX=/home/el-jausyan/ros-urdf/devel -DCMAKE_INSTALL_PREFIX=/home/el-jausyan/ros-urdf/install -G Unix Makefiles

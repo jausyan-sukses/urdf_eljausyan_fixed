@@ -1,0 +1,30 @@
+<launch>
+  <!-- Argumen untuk model URDF dan GUI RViz -->
+  <arg name="model" default="$(find robot_desc)/urdf/robot.urdf" />
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find robot_desc)/rviz/urdf.rviz" />
+  <!-- Mengatur parameter robot_description dengan hasil dari file URDF -->
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+
+  <!-- Node untuk joint state publisher, memungkinkan manipulasi joint -->
+  <!-- Jika ingin menggunakan GUI, uncomment bagian berikut ini -->
+  <!-- 
+  <node name="joint_state_publisher_gui"
+        pkg="joint_state_publisher_gui"
+        type="joint_state_publisher_gui" />
+  -->
+
+  <!-- Node joint_state_publisher (non-GUI) -->
+  <node name="joint_state_publisher"
+        pkg="joint_state_publisher"
+        type="joint_state_publisher" />
+
+  <!-- Node robot_state_publisher untuk menyebarkan informasi robot_description ke sistem -->
+  <node name="robot_state_publisher"
+        pkg="robot_state_publisher"
+        type="robot_state_publisher" />
+
+  <!-- Node RViz untuk visualisasi robot -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+  
+</launch>
